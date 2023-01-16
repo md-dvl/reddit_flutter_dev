@@ -4,7 +4,7 @@ import 'package:reddit_flutter_dev/bloc/posts_bloc.dart';
 import 'package:reddit_flutter_dev/data/local_storage.dart';
 import 'package:reddit_flutter_dev/repositories/dio_settings.dart';
 import 'package:reddit_flutter_dev/repositories/reddit_repo.dart';
-import 'package:reddit_flutter_dev/screens/main_screen.dart';
+import 'package:reddit_flutter_dev/screens/main_screen/main_screen.dart';
 import 'package:reddit_flutter_dev/services/preference_service.dart';
 
 void main() async {

@@ -13,6 +13,12 @@ abstract class AppTextStyles {
     color: AppColors.colorEDEDED,
   );
 
+  static const def16w600green = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: Colors.green,
+  );
+
   static const def18wBold = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.bold,

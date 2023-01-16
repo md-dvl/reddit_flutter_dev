@@ -7,23 +7,24 @@ class PostsBloc extends Bloc<PostsEvent, PostsStates> {
   final RedditRepo repo;
   final LocalPostsStorage localRepo;
   PostsBloc(this.repo, this.localRepo) : super(InitialState()) {
-    on<GetPosts>(((event, emit) async {
-      try {
-        emit(LoadingState());
-        final result = await repo.getPosts();
-        final List<PostModel> models = result.results ?? [];
-        localRepo.savePostsToCache(models);
-
-        emit(SuccessState(models));
-      } catch (SocketException) {
+    on<GetPosts>(
+      ((event, emit) async {
         try {
-          final List<PostModel> models = localRepo.getPostsFromCache();
+          emit(LoadingState());
+          final result = await repo.getPosts();
+          final List<PostModel> models = result.results ?? [];
+          localRepo.savePostsToCache(models);
           emit(SuccessState(models));
-        } catch (e) {
-          emit(ErrorState());
+        } catch (SocketException) {
+          try {
+            final List<PostModel> models = localRepo.getPostsFromCache();
+            emit(SuccessState(models));
+          } catch (e) {
+            emit(ErrorState());
+          }
         }
-      }
-    }));
+      }),
+    );
   }
 }
 
